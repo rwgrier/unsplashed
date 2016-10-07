@@ -11,10 +11,15 @@ import UIKit
 class GalleryViewController: UICollectionViewController {
     fileprivate let photoDataSource = PhotoDataSource()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 320, height: 279)
+        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.fontSizeChanged(_:)), name: .UIContentSizeCategoryDidChange, object: nil)
         
         loadPhotoInfoFromNetwork()
     }
@@ -33,6 +38,10 @@ class GalleryViewController: UICollectionViewController {
                 print("Error: \(error)")
             }
         }
+    }
+    
+    internal func fontSizeChanged(_ notification: Notification) {
+        collectionView?.reloadData()
     }
 }
 
