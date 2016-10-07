@@ -14,13 +14,9 @@ class GalleryViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 320, height: 279)
+        
         loadPhotoInfoFromNetwork()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
     }
     
     fileprivate func loadPhotoInfoFromNetwork() {

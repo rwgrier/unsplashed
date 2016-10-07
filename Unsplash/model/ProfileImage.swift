@@ -14,7 +14,6 @@ struct ProfileImage {
     let largeSrc: String?
 }
 
-
 // MARK: - Profile Image JSON
 
 extension ProfileImage {

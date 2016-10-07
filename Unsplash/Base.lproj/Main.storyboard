@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QiS-Dh-TY2">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QiS-Dh-TY2">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,11 +11,11 @@
         <scene sceneID="cOH-ZP-TR5">
             <objects>
                 <collectionViewController title="Curated" id="CPh-gA-0of" customClass="GalleryViewController" customModule="Unsplash" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5d8-6Z-ad2">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="5d8-6Z-ad2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UYK-eg-MjO">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="UYK-eg-MjO">
                             <size key="itemSize" width="320" height="279"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -24,18 +23,19 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="thumbnailCell" id="vbj-G7-RyP" customClass="PhotoCell" customModule="Unsplash" customModuleProvider="target">
-                                <frame key="frameInset" minX="28" minY="64" width="320" height="279"/>
+                                <rect key="frame" x="27.5" y="0.0" width="320" height="279"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="321" height="279"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Gb-u3-B4B">
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="1Gb-u3-B4B" secondAttribute="height" multiplier="4:3" id="Njm-zE-nhZ"/>
+                                                <constraint firstAttribute="width" constant="320" id="TNR-bF-dzW"/>
+                                                <constraint firstAttribute="height" constant="240" id="WMo-fg-8pl"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy3-oR-TiU">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy3-oR-TiU">
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -47,8 +47,11 @@
                                     <constraint firstItem="Fy3-oR-TiU" firstAttribute="centerX" secondItem="vbj-G7-RyP" secondAttribute="centerX" id="8ND-zV-bHs"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="Fy3-oR-TiU" secondAttribute="bottom" id="IJM-Xn-Lg4"/>
                                     <constraint firstItem="1Gb-u3-B4B" firstAttribute="top" secondItem="vbj-G7-RyP" secondAttribute="top" id="KVf-iV-pNj"/>
+                                    <constraint firstItem="Fy3-oR-TiU" firstAttribute="bottom" secondItem="vbj-G7-RyP" secondAttribute="bottomMargin" id="P66-HL-hwU"/>
                                     <constraint firstItem="1Gb-u3-B4B" firstAttribute="leading" secondItem="vbj-G7-RyP" secondAttribute="leading" id="fG7-8a-p3T"/>
                                     <constraint firstItem="Fy3-oR-TiU" firstAttribute="top" secondItem="1Gb-u3-B4B" secondAttribute="bottom" constant="10" id="g4E-R5-Azl"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Fy3-oR-TiU" secondAttribute="trailing" id="t1x-T7-64H"/>
+                                    <constraint firstItem="Fy3-oR-TiU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vbj-G7-RyP" secondAttribute="leading" id="uJd-xn-we9"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="1Gb-u3-B4B" id="hhF-5R-sk1"/>

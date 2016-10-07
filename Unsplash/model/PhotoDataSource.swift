@@ -76,7 +76,7 @@ extension PhotoDataSource {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [AnyObject] else { return }
                     
                     success = true
-                    let photos = self.photosFrom(json)
+                    let photos = self.photos(from: json)
                     self.cachedPhotos = photos
                     completion(Result.success(photos))
                 } catch _ {
@@ -90,7 +90,7 @@ extension PhotoDataSource {
         dataTask.resume()
     }
     
-    fileprivate func photosFrom(_ json: [AnyObject]) -> [Photo] {
+    fileprivate func photos(from json: [AnyObject]) -> [Photo] {
         var photos: [Photo] = []
 
         for rawPhotoJSON in json {
