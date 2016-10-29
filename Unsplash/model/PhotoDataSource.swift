@@ -9,7 +9,7 @@
 import Foundation
 
 // Looks a lot like the AlamoFire Result, huh?
-enum Result<Value, Error> {
+enum Result<Value> {
     case success(Value)
     case failure(Error)
     
@@ -43,6 +43,10 @@ enum LoadingState {
     case initial, loading, loaded, error
 }
 
+enum UnsplashError: Error {
+    case invalidURL, emptyData, invalidResponse, badHTTPResponse(statusCode: Int), invalidJSON
+}
+
 let clientKey: String = "49a8aed7e2684cf4bcada609598b4eaee5adf785544e38a0f8ac8b9d4dfc69a7"
 let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(clientKey)"
 
@@ -54,36 +58,42 @@ final class PhotoDataSource {
 // MARK: - Network Operations
 
 extension PhotoDataSource {
-    func loadPhotoListFromNetwork(_ completion: @escaping (Result<[Photo], NSError>) -> ()) {
+    func loadPhotoListFromNetwork(_ completion: @escaping (Result<[Photo]>) -> ()) {
         loadingState = .loading
         
         guard let jsonURL = URL(string: endpoint) else {
             self.loadingState = .error
-            completion(Result.failure(NSError(domain: "UnSplash", code: -1000, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            completion(Result.failure(UnsplashError.invalidURL))
             return
         }
         
         let dataTask: URLSessionDataTask = URLSession.shared.dataTask(with: jsonURL) { (data, response, error) in
             var success = false
+            var photos: [Photo] = []
+            var error: Error?
             
             defer {
+                self.cachedPhotos = photos
                 self.loadingState = success ? .loaded : .error
+                
+                if let error = error {
+                    completion(Result.failure(error))
+                } else {
+                    completion(Result.success(photos))
+                }
             }
             
-            guard let data = data else { return }
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [AnyObject] else { return }
-                    
-                    success = true
-                    let photos = self.photos(from: json)
-                    self.cachedPhotos = photos
-                    completion(Result.success(photos))
-                } catch _ {
-                    self.cachedPhotos = []
-                    // In this simple case, eat it. We're not doing anything special with a JSON parse error.
-                    completion(Result.failure(NSError(domain: "UnSplash", code: -1000, userInfo: [NSLocalizedDescriptionKey: "I dunno. "])))
-                }
+            guard let data = data else { error = UnsplashError.emptyData; return }
+            guard let httpResponse = response as? HTTPURLResponse else { error = UnsplashError.invalidResponse; return }
+            guard httpResponse.statusCode == 200 else { error = UnsplashError.badHTTPResponse(statusCode: httpResponse.statusCode); return }
+            
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [AnyObject] else { error = UnsplashError.invalidJSON; return }
+                
+                success = true
+                photos = self.photos(from: json)
+            } catch let caughtError {
+                error = caughtError
             }
         }
         

@@ -26,7 +26,7 @@ class GalleryViewController: UICollectionViewController {
     
     fileprivate func loadPhotoInfoFromNetwork() {
         // Kick off the network request
-        photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo], NSError>) in
+        photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo]>) in
             switch result {
             case .success(let photos):
                 print("Photo Count: \(photos.count)")
