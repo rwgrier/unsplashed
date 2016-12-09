@@ -45,6 +45,19 @@ enum LoadingState {
 
 enum UnsplashError: Error {
     case invalidURL, emptyData, invalidResponse, badHTTPResponse(statusCode: Int), invalidJSON
+    
+    var message: String {
+        let message: String
+        switch self {
+        case .invalidURL:                   message = "The URL used was invalid. Please verify and try again."
+        case .emptyData:                    message = "There was no data returned from the API."
+        case .invalidResponse:              message = "Invalid response. I'm not quite sure what to do with it."
+        case .invalidJSON:                  message = "Invalid JSON returned. I'm not quite sure what to do with it."
+        case .badHTTPResponse(let status):  message = "Recieved a \(status) from the service."
+        }
+        
+        return NSLocalizedString(message, comment: "")
+    }
 }
 
 let clientKey: String = "49a8aed7e2684cf4bcada609598b4eaee5adf785544e38a0f8ac8b9d4dfc69a7"
@@ -53,6 +66,7 @@ let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(cli
 final class PhotoDataSource {
     fileprivate(set) var loadingState: LoadingState = .initial
     fileprivate(set) var cachedPhotos: [Photo] = [] // Do I need this?
+    fileprivate(set) var serviceError: Error?
 }
 
 // MARK: - Network Operations
@@ -75,6 +89,7 @@ extension PhotoDataSource {
             defer {
                 self.cachedPhotos = photos
                 self.loadingState = success ? .loaded : .error
+                self.serviceError = error
                 
                 if let error = error {
                     completion(Result.failure(error))

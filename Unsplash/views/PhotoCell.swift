@@ -15,6 +15,7 @@ class PhotoCell: UICollectionViewCell {
     fileprivate var request: URLSessionDataTask?
     
     func setupCell(photo: Photo) {
+        label.adjustsFontForContentSizeCategory = true
         label.text = photo.user?.name
         
         guard let urlString = photo.smallUrlString, let url = URL(string: urlString) else { return }
@@ -29,21 +30,5 @@ class PhotoCell: UICollectionViewCell {
         })
         
         request?.resume()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        NotificationCenter.default.addObserver(self, selector: #selector(PhotoCell.fontSizeChanged(_:)), name: .UIContentSizeCategoryDidChange, object: nil)
-    }
-    
-    internal func fontSizeChanged(_ notification: Notification) {
-        guard let textStyleString = label.font.fontDescriptor.fontAttributes[UIFontDescriptorTextStyleAttribute] as? String else { return }
-        let textStyle = UIFontTextStyle(rawValue: textStyleString)
-        let font = UIFont.preferredFont(forTextStyle: textStyle)
-        label.font = font
     }
 }

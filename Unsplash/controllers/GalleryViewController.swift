@@ -27,15 +27,29 @@ class GalleryViewController: UICollectionViewController {
     fileprivate func loadPhotoInfoFromNetwork() {
         // Kick off the network request
         photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo]>) in
+            guard let weakSelf = self else { return }
+            
             switch result {
-            case .success(let photos):
-                print("Photo Count: \(photos.count)")
-//                print("Photos: \(photos)")
-                DispatchQueue.main.async {
-                    self?.collectionView?.reloadData()
-                }
             case .failure(let error):
-                print("Error: \(error)")
+                let title = NSLocalizedString("Photos Error", comment: "")
+                var message = NSLocalizedString("An unknown error has occurred", comment: "")
+                
+                if let unsplashError = error as? UnsplashError {
+                    message = unsplashError.message
+                }
+                
+                let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
+                alertView.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: ""), style: .default, handler: { (action) in
+                    weakSelf.loadPhotoInfoFromNetwork()
+                }))
+                
+                weakSelf.present(alertView, animated: true, completion: nil)
+            case .success:  break
+            }
+            
+            DispatchQueue.main.async {
+                weakSelf.collectionView?.reloadData()
             }
         }
     }
@@ -62,7 +76,6 @@ extension GalleryViewController {
         let photo = photoDataSource.cachedPhotos[indexPath.row]
         
         photoCell.setupCell(photo: photo)
-        
         return photoCell
     }
 }

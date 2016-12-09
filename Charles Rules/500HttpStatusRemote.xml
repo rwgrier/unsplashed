@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<?charles serialisation-version='2.0' ?>
+<map>
+  <toolEnabled>true</toolEnabled>
+  <mappings>
+    <mapMapping>
+      <sourceLocation>
+        <protocol>https</protocol>
+        <host>api.unsplash.com</host>
+        <port>443</port>
+        <path>/photos/curated/</path>
+        <query>client_id=*</query>
+      </sourceLocation>
+      <destLocation>
+        <protocol>http</protocol>
+        <host>httpstat.us</host>
+        <path>/500</path>
+      </destLocation>
+      <preserveHostHeader>false</preserveHostHeader>
+      <enabled>true</enabled>
+    </mapMapping>
+  </mappings>
+</map>
