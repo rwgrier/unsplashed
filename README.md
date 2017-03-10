@@ -2,8 +2,8 @@
 
 This project is to be used with my blog post which is a primer on using Charles Proxy. 
 
-Blog Post: [Coming Soon]()
-Medium Post: [Coming Soon]()
+- Blog Post: [Coming Soon]()
+- Medium Post: [Coming Soon]()
 
 ## How To Run
 
