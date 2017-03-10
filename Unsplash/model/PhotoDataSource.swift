@@ -60,7 +60,7 @@ enum UnsplashError: Error {
     }
 }
 
-let clientKey: String = "49a8aed7e2684cf4bcada609598b4eaee5adf785544e38a0f8ac8b9d4dfc69a7"
+let clientKey: String = "[YOUR APPLICATION ID HERE]"
 let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(clientKey)"
 
 final class PhotoDataSource {
