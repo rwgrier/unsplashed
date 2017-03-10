@@ -16,4 +16,4 @@ The project is in Swift 3 and on Xcode 8.x.
 
 ## License
 
-These examples are made available under the MIT license. See the LICENSE file for more info.
+This project are made available under the MIT license. See the LICENSE file for more info.
