@@ -19,7 +19,7 @@ struct ProfileImage {
 extension ProfileImage {
     init?(json: [String: AnyObject]?) {
         guard let json = json else { return nil }
-        
+
         smallSrc = json["small"] as? String
         mediumSrc = json["medium"] as? String
         largeSrc = json["large"] as? String

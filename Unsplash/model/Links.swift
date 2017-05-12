@@ -21,7 +21,7 @@ struct Links {
 extension Links {
     init?(json: [String: AnyObject]?) {
         guard let json = json else { return nil }
-        
+
         selfLink = json["self"] as? String
         html = json["html"] as? String
         photos = json["photos"] as? String

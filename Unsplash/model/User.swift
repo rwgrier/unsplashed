@@ -21,7 +21,7 @@ struct User {
 extension User {
     init?(json: [String: AnyObject]?) {
         guard let json = json else { return nil }
-        
+
         id = json["id"] as? String
         username = json["username"] as? String
         name = json["name"] as? String

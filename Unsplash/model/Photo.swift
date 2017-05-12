@@ -19,14 +19,12 @@ struct Photo {
     let likedByUser: Bool
     let links: Links?
     let user: User?
-    
+
     let rawUrlString: String?
     let fullUrlString: String?
     let regularUrlString: String?
     let smallUrlString: String?
     let thumbnailUrlString: String?
-    
-    // TODO: Add categories
 }
 
 // MARK: - Photo JSON
@@ -35,28 +33,28 @@ extension Photo {
     init?(json: [String: AnyObject]?) {
         guard let json = json else { return nil }
         let dateFormatter = ISO8601DateFormatter()
-        
+
         id = json["id"] as? String
         width = json["width"] as? Int
         height = json["height"] as? Int
         likes = json["likes"] as? Int
         likedByUser = (json["liked_by_user"] as? Bool) ?? false
-        
+
         if let jsonDate = json["created_at"] as? String {
             created = dateFormatter.date(from: jsonDate)
         } else {
             created = Date()
         }
-        
+
         if let hexColor = json["color"] as? String {
             color = UIColor(hex: hexColor)
         } else {
             color = nil
         }
-        
+
         links = Links(json: json["links"] as? [String: AnyObject])
         user = User(json: json["user"] as? [String: AnyObject])
-        
+
         if let urls = json["urls"] as? [String: String] {
             rawUrlString = urls["raw"]
             fullUrlString = urls["full"]
@@ -72,7 +70,6 @@ extension Photo {
         }
     }
 }
-
 
 // MARK: - Links JSON
 
