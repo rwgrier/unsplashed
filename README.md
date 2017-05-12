@@ -4,8 +4,8 @@
 
 This project is to be used with my blog post which is a primer on using Charles Proxy. 
 
-- Blog Post: [Coming Soon]()
-- Medium Post: [Coming Soon]()
+- Blog Post: [Charles Proxy Primer](http://ryan.grier.co/post/158520255399/charles-proxy-primer)
+- Medium Post: [Charles Proxy Primer](https://medium.com/@rwgrier/charles-proxy-primer-e19804920618)
 
 ## How To Run
 
