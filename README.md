@@ -1,5 +1,7 @@
 # Charles Proxy Primer Blog Post
 
+[![Build Status](https://travis-ci.org/rwgrier/unsplashed.png)](https://travis-ci.org/rwgrier/unsplashed)
+
 This project is to be used with my blog post which is a primer on using Charles Proxy. 
 
 - Blog Post: [Coming Soon]()
