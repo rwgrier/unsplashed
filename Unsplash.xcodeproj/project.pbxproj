@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F1897741D3D7A27007B1D59 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1897731D3D7A27007B1D59 /* UIColorExtension.swift */; };
+		8F5CAE461EF4613200D23D32 /* PhotoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5CAE451EF4613200D23D32 /* PhotoURLs.swift */; };
 		8F67117A1D3E589B0069F3E3 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6711791D3E589B0069F3E3 /* Links.swift */; };
 		8F67117C1D3E58AC0069F3E3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F67117B1D3E58AC0069F3E3 /* User.swift */; };
 		8F67117E1D3E58D60069F3E3 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F67117D1D3E58D60069F3E3 /* ProfileImage.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		8F1897731D3D7A27007B1D59 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		8F5CAE451EF4613200D23D32 /* PhotoURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoURLs.swift; sourceTree = "<group>"; };
 		8F6711791D3E589B0069F3E3 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		8F67117B1D3E58AC0069F3E3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8F67117D1D3E58D60069F3E3 /* ProfileImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				B93578841CF91E1200FE5732 /* Photo.swift */,
+				8F5CAE451EF4613200D23D32 /* PhotoURLs.swift */,
 				B93578861CF921BB00FE5732 /* PhotoDataSource.swift */,
 				8F6711791D3E589B0069F3E3 /* Links.swift */,
 				8F67117B1D3E58AC0069F3E3 /* User.swift */,
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5CAE461EF4613200D23D32 /* PhotoURLs.swift in Sources */,
 				B93578851CF91E1200FE5732 /* Photo.swift in Sources */,
 				8FB5BCC31D46DDED00B89817 /* PhotoCell.swift in Sources */,
 				8F67117E1D3E58D60069F3E3 /* ProfileImage.swift in Sources */,
@@ -487,7 +491,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.Unsplash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -503,7 +507,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.Unsplash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

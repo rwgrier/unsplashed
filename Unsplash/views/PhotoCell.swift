@@ -18,7 +18,7 @@ class PhotoCell: UICollectionViewCell {
         label.adjustsFontForContentSizeCategory = true
         label.text = photo.user?.name
 
-        guard let urlString = photo.smallUrlString, let url = URL(string: urlString) else { return }
+        guard let url = photo.urls?.small else { return }
         request?.cancel()
         request = URLSession.shared.dataTask(with: url, completionHandler: { [weak self] (data: Data?, _, _) in
             guard let weakSelf = self else { return }

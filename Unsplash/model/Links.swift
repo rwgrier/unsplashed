@@ -8,24 +8,11 @@
 
 import Foundation
 
-struct Links {
-    let selfLink: String?
-    let html: String?
-    let photos: String?
-    let likes: String?
-    let download: String?
-}
-
-// MARK: - Link JSON
-
-extension Links {
-    init?(json: [String: AnyObject]?) {
-        guard let json = json else { return nil }
-
-        selfLink = json["self"] as? String
-        html = json["html"] as? String
-        photos = json["photos"] as? String
-        likes = json["likes"] as? String
-        download = json["download"] as? String
-    }
+struct Links: Codable {
+    let `self`: URL?
+    let html: URL?
+    let photos: URL?
+    let likes: URL?
+    let download: URL?
+    let portfolio: URL?
 }
