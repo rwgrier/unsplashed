@@ -9,7 +9,7 @@ This project is to be used with my blog post which is a primer on using Charles 
 
 ## How To Run
 
-The project is in Swift 3 and on Xcode 8.x. 
+The project is in Swift 4 and on Xcode 9.x. 
 
 In order to run the sample project, you'll need an Unsplash developer account and an Application ID. You can apply for one here: [Unsplash API](https://unsplash.com/developers). Once you have an Application ID, replace `[YOUR APPLICATION ID HERE]` on the line that says `let clientKey: String = "[YOUR APPLICATION ID HERE]"` in the `PhotoDataSource.swift` class file. 
 
