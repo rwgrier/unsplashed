@@ -103,28 +103,16 @@ extension PhotoDataSource {
             guard httpResponse.statusCode == 200 else { error = UnsplashError.badHTTPResponse(statusCode: httpResponse.statusCode); return }
 
             do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [AnyObject] else { error = UnsplashError.invalidJSON; return }
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                photos = try decoder.decode([Photo].self, from: data)// else { error = UnsplashError.invalidJSON; return }
 
                 success = true
-                photos = self.photos(from: json)
             } catch let caughtError {
                 error = caughtError
             }
         }
 
         dataTask.resume()
-    }
-
-    fileprivate func photos(from json: [AnyObject]) -> [Photo] {
-        var photos: [Photo] = []
-
-        for rawPhotoJSON in json {
-            guard let photoJSON = rawPhotoJSON as? [String: AnyObject] else { continue }
-            if let photo = Photo(json: photoJSON) {
-                photos.append(photo)
-            }
-        }
-
-        return photos
     }
 }

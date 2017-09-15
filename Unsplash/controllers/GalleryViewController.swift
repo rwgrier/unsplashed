@@ -54,7 +54,7 @@ class GalleryViewController: UICollectionViewController {
         }
     }
 
-    internal func fontSizeChanged(_ notification: Notification) {
+    @objc internal func fontSizeChanged(_ notification: Notification) {
         collectionView?.reloadData()
     }
 }
