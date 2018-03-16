@@ -64,9 +64,9 @@ let clientKey: String = "[YOUR APPLICATION ID HERE]"
 let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(clientKey)"
 
 final class PhotoDataSource {
-    fileprivate(set) var loadingState: LoadingState = .initial
-    fileprivate(set) var cachedPhotos: [Photo] = [] // Do I need this?
-    fileprivate(set) var serviceError: Error?
+    private(set) var loadingState: LoadingState = .initial
+    private(set) var cachedPhotos: [Photo] = [] // Do I need this?
+    private(set) var serviceError: Error?
 }
 
 // MARK: - Network Operations

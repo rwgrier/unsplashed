@@ -10,12 +10,13 @@ import UIKit
 
 extension UIColor {
     convenience init(hex: String) {
-        var cleanHex = hex.trimmingCharacters(in: CharacterSet.whitespaces).uppercased()
+        var cleanHex = hex.trimmingCharacters(in: .whitespaces).uppercased()
+
         if cleanHex.hasPrefix("#") {
-            cleanHex = cleanHex.substring(from: cleanHex.index(cleanHex.startIndex, offsetBy: 1))
+            cleanHex = String(cleanHex[cleanHex.index(cleanHex.startIndex, offsetBy: 1)...])
         }
 
-        guard cleanHex.characters.count == 6 else {
+        guard cleanHex.count == 6 else {
             self.init(red: 255.0/2, green: 255.0/2, blue: 255.0/2, alpha: 1.0)
             return
         }

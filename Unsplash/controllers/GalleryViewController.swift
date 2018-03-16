@@ -9,7 +9,7 @@
 import UIKit
 
 class GalleryViewController: UICollectionViewController {
-    fileprivate let photoDataSource = PhotoDataSource()
+    private let photoDataSource = PhotoDataSource()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -24,7 +24,7 @@ class GalleryViewController: UICollectionViewController {
         loadPhotoInfoFromNetwork()
     }
 
-    fileprivate func loadPhotoInfoFromNetwork() {
+    private func loadPhotoInfoFromNetwork() {
         // Kick off the network request
         photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo]>) in
             guard let weakSelf = self else { return }

@@ -9,10 +9,10 @@
 import UIKit
 
 class PhotoCell: UICollectionViewCell {
-    @IBOutlet fileprivate var imageView: UIImageView!
-    @IBOutlet fileprivate var label: UILabel!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var label: UILabel!
 
-    fileprivate var request: URLSessionDataTask?
+    private var request: URLSessionDataTask?
 
     func setupCell(photo: Photo) {
         label.adjustsFontForContentSizeCategory = true
