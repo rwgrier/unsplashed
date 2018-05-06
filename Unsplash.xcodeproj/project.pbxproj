@@ -14,6 +14,7 @@
 		8F67117E1D3E58D60069F3E3 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F67117D1D3E58D60069F3E3 /* ProfileImage.swift */; };
 		8FAE9566205B5ACC002C3E38 /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */; };
 		8FB5BCC31D46DDED00B89817 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */; };
+		8FF84783209F539D007F4D07 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */; };
 		B93578851CF91E1200FE5732 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93578841CF91E1200FE5732 /* Photo.swift */; };
 		B93578871CF921BB00FE5732 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93578861CF921BB00FE5732 /* PhotoDataSource.swift */; };
 		B9C961E81CF7266700B79F0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C961E71CF7266700B79F0B /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		8F6711871D3E59D00069F3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
 		8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		B93578841CF91E1200FE5732 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B93578861CF921BB00FE5732 /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
 		B9C961E41CF7266700B79F0B /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF84783209F539D007F4D07 /* OHHTTPStubs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +116,14 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		8FF84781209F539C007F4D07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B93578831CF91DCB00FE5732 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +143,7 @@
 				B9C961E61CF7266700B79F0B /* Unsplash */,
 				8F6711841D3E59D00069F3E3 /* UnsplashTests */,
 				B9C961E51CF7266700B79F0B /* Products */,
+				8FF84781209F539C007F4D07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,8 +370,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UnsplashTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.UnsplashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -376,8 +392,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UnsplashTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.UnsplashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
