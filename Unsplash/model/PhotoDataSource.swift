@@ -92,20 +92,20 @@ extension PhotoDataSource {
                 self.serviceError = error
 
                 if let error = error {
-                    completion(Result.failure(error))
+                    completion(.failure(error))
                 } else {
-                    completion(Result.success(photos))
+                    completion(.success(photos))
                 }
             }
 
-            guard let data = data else { error = UnsplashError.emptyData; return }
+            guard let data = data, data.count > 0 else { error = UnsplashError.emptyData; return }
             guard let httpResponse = response as? HTTPURLResponse else { error = UnsplashError.invalidResponse; return }
             guard httpResponse.statusCode == 200 else { error = UnsplashError.badHTTPResponse(statusCode: httpResponse.statusCode); return }
 
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
-                photos = try decoder.decode([Photo].self, from: data)// else { error = UnsplashError.invalidJSON; return }
+                photos = try decoder.decode([Photo].self, from: data)
 
                 success = true
             } catch let caughtError {
