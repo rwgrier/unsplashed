@@ -19,7 +19,7 @@ class GalleryViewController: UICollectionViewController {
         super.viewDidLoad()
 
         (collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 320, height: 279)
-        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.fontSizeChanged(_:)), name: .UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.fontSizeChanged(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         loadPhotoInfoFromNetwork()
     }
