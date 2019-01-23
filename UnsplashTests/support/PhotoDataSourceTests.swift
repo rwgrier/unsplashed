@@ -7,13 +7,14 @@
 //
 
 import XCTest
-import OHHTTPStubs
+import Mocker
 @testable import Unsplash
 
 class PhotoDataSourceTests: XCTestCase {
-    override func tearDown() {
-        OHHTTPStubs.removeAllStubs()
-        super.tearDown()
+    private var urlSession: URLSession {
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockingURLProtocol.self]
+        return URLSession(configuration: configuration)
     }
 }
 
@@ -21,10 +22,15 @@ class PhotoDataSourceTests: XCTestCase {
 
 extension PhotoDataSourceTests {
     func testLoadPhotoListFromNetwork_cachedValues_passing() {
-        stubResponse(fileNamed: "valid_response.json", statusCode: 200)
         let expectation = self.expectation(description: "loading photos from network.")
-        let dataSource = PhotoDataSource()
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
 
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
+            .get: MockData.validJSON.data
+            ]).register()
+
+        let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
             XCTAssertTrue(results.isSuccess)
             guard results.isSuccess else { return }
@@ -35,9 +41,7 @@ extension PhotoDataSourceTests {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 }
 
@@ -45,11 +49,17 @@ extension PhotoDataSourceTests {
 
 extension PhotoDataSourceTests {
     func testLoadPhotoListFromNetwork_validData_passing() {
-        stubResponse(fileNamed: "valid_response.json", statusCode: 200)
         let expectation = self.expectation(description: "loading photos from network.")
-        let dataSource = PhotoDataSource()
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
 
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
+            .get: MockData.validJSON.data
+        ]).register()
+
+        let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
+            dump(results)
             XCTAssertTrue(results.isSuccess)
             guard results.isSuccess else { return }
             let photoCount = results.value?.count ?? 0
@@ -58,16 +68,19 @@ extension PhotoDataSourceTests {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 
     func testLoadPhotoListFromNetwork_validDataMultiplePhotos_passing() {
-        stubResponse(fileNamed: "valid_two_photos.json", statusCode: 200)
         let expectation = self.expectation(description: "loading photos from network.")
-        let dataSource = PhotoDataSource()
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
 
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
+            .get: MockData.validTwoPhotoJSON.data
+            ]).register()
+
+        let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
             XCTAssertTrue(results.isSuccess)
             guard results.isSuccess else { return }
@@ -77,16 +90,19 @@ extension PhotoDataSourceTests {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 
     func testLoadPhotoListFromNetwork_serverError_failure() {
-        stubResponse(fileNamed: "error_response.json", statusCode: 500)
-
         let expectation = self.expectation(description: "loading photos from network.")
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 500, data: [
+            .get: MockData.validTwoPhotoJSON.data
+            ]).register()
+
         let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
             XCTAssertTrue(results.isFailure)
             guard results.isFailure, let error = results.error as? UnsplashError else { return }
@@ -98,21 +114,19 @@ extension PhotoDataSourceTests {
             }
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 
     func testLoadPhotoListFromNetwork_emptyData_failure() {
-        stub(condition: isHost("api.unsplash.com")) { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(
-                data: Data(),
-                statusCode: 200,
-                headers: ["Content-Type": "application/json"])
-        }
-
         let expectation = self.expectation(description: "loading photos from network.")
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
+            .get: Data()
+            ]).register()
+
         let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
             XCTAssertTrue(results.isFailure)
             guard results.isFailure, let error = results.error as? UnsplashError else { return }
@@ -124,34 +138,40 @@ extension PhotoDataSourceTests {
             }
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 
     func testLoadPhotoListFromNetwork_invalidJSON_failure() {
-        stubResponse(fileNamed: "error_invalid_response.json", statusCode: 200)
-
         let expectation = self.expectation(description: "loading photos from network.")
+        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+
+        Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
+            .get: MockData.invalidJSON.data
+            ]).register()
+
         let dataSource = PhotoDataSource()
+        dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
             XCTAssertTrue(results.isFailure)
             guard results.isFailure, (results.error as? DecodingError) != nil else { return }
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1.0) { (error: Error?) -> Void in
-            if error != nil { XCTFail("loadPhotoListFromNetwork failed") }
-        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
+}
 
-    private func stubResponse(fileNamed name: String, statusCode: Int32) {
-        stub(condition: isHost("api.unsplash.com")) { (_) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(
-                fileAtPath: OHPathForFile(name, type(of: self))!,
-                statusCode: statusCode,
-                headers: ["Content-Type": "application/json"]
-            )
-        }
+final class MockData {
+    static let validJSON: URL = Bundle(for: MockData.self).url(forResource: "valid_response", withExtension: "json")!
+    static let validTwoPhotoJSON: URL = Bundle(for: MockData.self).url(forResource: "valid_two_photos", withExtension: "json")!
+    static let serverErrorJSON: URL = Bundle(for: MockData.self).url(forResource: "error_response", withExtension: "json")!
+    static let invalidJSON: URL = Bundle(for: MockData.self).url(forResource: "error_invalid_response", withExtension: "json")!
+}
+
+private extension URL {
+    /// Returns a `Data` representation of the current `URL`. Force unwrapping as it's only used for tests.
+    var data: Data {
+        //swiftlint:disable:next force_try
+        return try! Data(contentsOf: self)
     }
 }

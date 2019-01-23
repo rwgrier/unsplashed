@@ -14,7 +14,7 @@
 		8F67117E1D3E58D60069F3E3 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F67117D1D3E58D60069F3E3 /* ProfileImage.swift */; };
 		8FAE9566205B5ACC002C3E38 /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */; };
 		8FB5BCC31D46DDED00B89817 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */; };
-		8FF84783209F539D007F4D07 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */; };
+		8FC5D1E521F162D4007D0E2A /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC5D1E421F162D4007D0E2A /* Mocker.framework */; };
 		8FF84785209F55CC007F4D07 /* PhotoDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF84784209F55CC007F4D07 /* PhotoDataSourceTests.swift */; };
 		8FF84788209F5707007F4D07 /* valid_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FF84787209F5707007F4D07 /* valid_response.json */; };
 		8FF8478A209FCDF8007F4D07 /* valid_two_photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FF84789209FCDF8007F4D07 /* valid_two_photos.json */; };
@@ -49,7 +49,7 @@
 		8F6711871D3E59D00069F3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
 		8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
-		8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
+		8FC5D1E421F162D4007D0E2A /* Mocker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mocker.framework; path = Carthage/Build/iOS/Mocker.framework; sourceTree = "<group>"; };
 		8FF84784209F55CC007F4D07 /* PhotoDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSourceTests.swift; sourceTree = "<group>"; };
 		8FF84787209F5707007F4D07 /* valid_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = valid_response.json; sourceTree = "<group>"; };
 		8FF84789209FCDF8007F4D07 /* valid_two_photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = valid_two_photos.json; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FF84783209F539D007F4D07 /* OHHTTPStubs.framework in Frameworks */,
+				8FC5D1E521F162D4007D0E2A /* Mocker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +131,7 @@
 		8FF84781209F539C007F4D07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8FF84782209F539D007F4D07 /* OHHTTPStubs.framework */,
+				8FC5D1E421F162D4007D0E2A /* Mocker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
