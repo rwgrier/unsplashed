@@ -60,13 +60,15 @@ enum UnsplashError: Error {
     }
 }
 
-let clientKey: String = "[YOUR APPLICATION ID HERE]"
+let clientKey: String = "YOUR_APPLICATION_ID_HERE"
 let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(clientKey)"
 
 final class PhotoDataSource {
     private(set) var loadingState: LoadingState = .initial
     private(set) var cachedPhotos: [Photo] = [] // Do I need this?
     private(set) var serviceError: Error?
+
+    var urlSession: URLSession = URLSession.shared
 }
 
 // MARK: - Network Operations
@@ -81,7 +83,7 @@ extension PhotoDataSource {
             return
         }
 
-        let dataTask: URLSessionDataTask = URLSession.shared.dataTask(with: jsonURL) { (data, response, error) in
+        let dataTask: URLSessionDataTask = urlSession.dataTask(with: jsonURL) { (data, response, error) in
             var success = false
             var photos: [Photo] = []
             var error: Error?
