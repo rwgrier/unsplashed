@@ -26,8 +26,8 @@ class GalleryViewController: UICollectionViewController {
 
     private func loadPhotoInfoFromNetwork() {
         // Kick off the network request
-        photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo]>) in
-            guard let weakSelf = self else { return }
+        photoDataSource.loadPhotoListFromNetwork { [weak self] (result: Result<[Photo], Error>) in
+            guard let strongSelf = self else { return }
 
             switch result {
             case .failure(let error):
@@ -41,15 +41,17 @@ class GalleryViewController: UICollectionViewController {
                 let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alertView.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
                 alertView.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: ""), style: .default, handler: { (_) in
-                    weakSelf.loadPhotoInfoFromNetwork()
+                    strongSelf.loadPhotoInfoFromNetwork()
                 }))
 
-                weakSelf.present(alertView, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    strongSelf.present(alertView, animated: true, completion: nil)
+                }
             case .success:  break
             }
 
             DispatchQueue.main.async {
-                weakSelf.collectionView?.reloadData()
+                strongSelf.collectionView?.reloadData()
             }
         }
     }
