@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F173D58247F319E002E7C40 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 8F173D57247F319E002E7C40 /* Mocker */; };
 		8F1897741D3D7A27007B1D59 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1897731D3D7A27007B1D59 /* UIColorExtension.swift */; };
 		8F5CAE461EF4613200D23D32 /* PhotoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5CAE451EF4613200D23D32 /* PhotoURLs.swift */; };
 		8F67117A1D3E589B0069F3E3 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6711791D3E589B0069F3E3 /* Links.swift */; };
@@ -14,7 +15,6 @@
 		8F67117E1D3E58D60069F3E3 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F67117D1D3E58D60069F3E3 /* ProfileImage.swift */; };
 		8FAE9566205B5ACC002C3E38 /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */; };
 		8FB5BCC31D46DDED00B89817 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */; };
-		8FC5D1E521F162D4007D0E2A /* Mocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC5D1E421F162D4007D0E2A /* Mocker.framework */; };
 		8FF84785209F55CC007F4D07 /* PhotoDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF84784209F55CC007F4D07 /* PhotoDataSourceTests.swift */; };
 		8FF84788209F5707007F4D07 /* valid_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FF84787209F5707007F4D07 /* valid_response.json */; };
 		8FF8478A209FCDF8007F4D07 /* valid_two_photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FF84789209FCDF8007F4D07 /* valid_two_photos.json */; };
@@ -49,7 +49,6 @@
 		8F6711871D3E59D00069F3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FAE9565205B5ACC002C3E38 /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
 		8FB5BCC21D46DDED00B89817 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
-		8FC5D1E421F162D4007D0E2A /* Mocker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mocker.framework; path = Carthage/Build/iOS/Mocker.framework; sourceTree = "<group>"; };
 		8FF84784209F55CC007F4D07 /* PhotoDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSourceTests.swift; sourceTree = "<group>"; };
 		8FF84787209F5707007F4D07 /* valid_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = valid_response.json; sourceTree = "<group>"; };
 		8FF84789209FCDF8007F4D07 /* valid_two_photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = valid_two_photos.json; sourceTree = "<group>"; };
@@ -71,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FC5D1E521F162D4007D0E2A /* Mocker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F173D58247F319E002E7C40 /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +130,6 @@
 		8FF84781209F539C007F4D07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8FC5D1E421F162D4007D0E2A /* Mocker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,6 +244,9 @@
 			dependencies = (
 			);
 			name = Unsplash;
+			packageProductDependencies = (
+				8F173D57247F319E002E7C40 /* Mocker */,
+			);
 			productName = Unsplash;
 			productReference = B9C961E41CF7266700B79F0B /* Unsplash.app */;
 			productType = "com.apple.product-type.application";
@@ -257,33 +258,36 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Ryan Grier";
 				TargetAttributes = {
 					8F6711821D3E59D00069F3E3 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G8C3PMN49A;
 						DevelopmentTeamName = "Ryan Grier";
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B9C961E31CF7266700B79F0B;
 					};
 					B9C961E31CF7266700B79F0B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8C3PMN49A;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
 			buildConfigurationList = B9C961DF1CF7266700B79F0B /* Build configuration list for PBXProject "Unsplash" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
 			mainGroup = B9C961DB1CF7266700B79F0B;
+			packageReferences = (
+				8F173D56247F319E002E7C40 /* XCRemoteSwiftPackageReference "Mocker" */,
+			);
 			productRefGroup = B9C961E51CF7266700B79F0B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -331,7 +335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -398,17 +402,19 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = UnsplashTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.UnsplashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
 			};
 			name = Debug;
@@ -419,16 +425,19 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = UnsplashTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.UnsplashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
 			};
 			name = Release;
@@ -437,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -480,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -494,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -531,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -546,10 +557,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G8C3PMN49A;
 				INFOPLIST_FILE = Unsplash/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.Unsplash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -559,11 +573,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G8C3PMN49A;
 				INFOPLIST_FILE = Unsplash/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryangrier.Unsplash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -598,6 +616,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F173D56247F319E002E7C40 /* XCRemoteSwiftPackageReference "Mocker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WeTransfer/Mocker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F173D57247F319E002E7C40 /* Mocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F173D56247F319E002E7C40 /* XCRemoteSwiftPackageReference "Mocker" */;
+			productName = Mocker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9C961DC1CF7266700B79F0B /* Project object */;
 }

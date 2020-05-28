@@ -8,37 +8,6 @@
 
 import Foundation
 
-// Looks a lot like the AlamoFire Result, huh?
-enum Result<Value> {
-    case success(Value)
-    case failure(Error)
-
-    var isSuccess: Bool {
-        switch self {
-        case .success:  return true
-        case .failure:  return false
-        }
-    }
-
-    var isFailure: Bool {
-        return !isSuccess
-    }
-
-    var value: Value? {
-        switch self {
-        case .success(let value):   return value
-        case .failure:              return nil
-        }
-    }
-
-    var error: Error? {
-        switch self {
-        case .success:              return nil
-        case .failure(let error):   return error
-        }
-    }
-}
-
 enum LoadingState {
     case initial, loading, loaded, error
 }
@@ -61,7 +30,7 @@ enum UnsplashError: Error {
 }
 
 let clientKey: String = "YOUR_APPLICATION_ID_HERE"
-let endpoint: String = "https://api.unsplash.com/photos/curated/?client_id=\(clientKey)"
+let endpoint: String = "https://api.unsplash.com/photos/?client_id=\(clientKey)"
 
 final class PhotoDataSource {
     private(set) var loadingState: LoadingState = .initial
@@ -74,7 +43,7 @@ final class PhotoDataSource {
 // MARK: - Network Operations
 
 extension PhotoDataSource {
-    func loadPhotoListFromNetwork(_ completion: @escaping (Result<[Photo]>) -> Void) {
+    func loadPhotoListFromNetwork(_ completion: @escaping (Result<[Photo], Error>) -> Void) {
         loadingState = .loading
 
         guard let jsonURL = URL(string: endpoint) else {

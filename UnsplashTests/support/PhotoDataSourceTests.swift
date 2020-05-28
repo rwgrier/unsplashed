@@ -23,7 +23,7 @@ class PhotoDataSourceTests: XCTestCase {
 extension PhotoDataSourceTests {
     func testLoadPhotoListFromNetwork_cachedValues_passing() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
             .get: MockData.validJSON.data
@@ -32,8 +32,9 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            XCTAssertTrue(results.isSuccess)
-            guard results.isSuccess else { return }
+            let photos = try? results.get()
+            XCTAssertNotNil(photos)
+            guard photos != nil else { return }
 
             let photoCount = dataSource.cachedPhotos.count
             XCTAssertEqual(1, photoCount)
@@ -50,7 +51,7 @@ extension PhotoDataSourceTests {
 extension PhotoDataSourceTests {
     func testLoadPhotoListFromNetwork_validData_passing() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
             .get: MockData.validJSON.data
@@ -59,10 +60,9 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            dump(results)
-            XCTAssertTrue(results.isSuccess)
-            guard results.isSuccess else { return }
-            let photoCount = results.value?.count ?? 0
+            let photos = try? results.get()
+            XCTAssertNotNil(photos)
+            let photoCount = photos?.count ?? 0
             XCTAssertEqual(1, photoCount)
 
             expectation.fulfill()
@@ -73,7 +73,7 @@ extension PhotoDataSourceTests {
 
     func testLoadPhotoListFromNetwork_validDataMultiplePhotos_passing() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
             .get: MockData.validTwoPhotoJSON.data
@@ -82,9 +82,9 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            XCTAssertTrue(results.isSuccess)
-            guard results.isSuccess else { return }
-            let photoCount = results.value?.count ?? 0
+            let photos = try? results.get()
+            XCTAssertNotNil(photos)
+            let photoCount = photos?.count ?? 0
             XCTAssertEqual(2, photoCount)
 
             expectation.fulfill()
@@ -95,7 +95,7 @@ extension PhotoDataSourceTests {
 
     func testLoadPhotoListFromNetwork_serverError_failure() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 500, data: [
             .get: MockData.validTwoPhotoJSON.data
@@ -104,8 +104,7 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            XCTAssertTrue(results.isFailure)
-            guard results.isFailure, let error = results.error as? UnsplashError else { return }
+            guard case .failure(let error as UnsplashError) = results else { return }
             switch error {
             case .badHTTPResponse(statusCode: 500):
                 expectation.fulfill()
@@ -119,7 +118,7 @@ extension PhotoDataSourceTests {
 
     func testLoadPhotoListFromNetwork_emptyData_failure() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
             .get: Data()
@@ -128,8 +127,7 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            XCTAssertTrue(results.isFailure)
-            guard results.isFailure, let error = results.error as? UnsplashError else { return }
+            guard case .failure(let error as UnsplashError) = results else { return }
             switch error {
             case .emptyData:
                 expectation.fulfill()
@@ -143,7 +141,7 @@ extension PhotoDataSourceTests {
 
     func testLoadPhotoListFromNetwork_invalidJSON_failure() {
         let expectation = self.expectation(description: "loading photos from network.")
-        let originalURL = URL(string: "https://api.unsplash.com/photos/curated/?client_id=UNITTESTS")!
+        let originalURL = URL(string: "https://api.unsplash.com/photos/?client_id=UNITTESTS")!
 
         Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [
             .get: MockData.invalidJSON.data
@@ -152,8 +150,7 @@ extension PhotoDataSourceTests {
         let dataSource = PhotoDataSource()
         dataSource.urlSession = urlSession
         dataSource.loadPhotoListFromNetwork { (results) in
-            XCTAssertTrue(results.isFailure)
-            guard results.isFailure, (results.error as? DecodingError) != nil else { return }
+            guard case .failure(_ as DecodingError) = results else { return }
             expectation.fulfill()
         }
 
